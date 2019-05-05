@@ -20,7 +20,6 @@ class FlexMiddlewareFactory
 
         $middlewares = [];
 
-
         foreach ($middlewareConfigs as $key => $middlewareConfig) {
             $class = $middlewareConfig['class'];
             unset($middlewareConfig['class']);
@@ -33,7 +32,11 @@ class FlexMiddlewareFactory
                 $value = $value === "true" ? true : $value === "false" ? false : $value;
 
                 if (method_exists($middleware, $key)) {
-                    call_user_func([$middleware, $key], $value);
+                    if (is_array($value)) {
+                        call_user_func_array([$middleware, $key], $value);
+                    } else {
+                        call_user_func([$middleware, $key], $value);
+                    }
                     continue;
                 }
 
@@ -44,6 +47,8 @@ class FlexMiddlewareFactory
 
                 throw new \InvalidArgumentException("Invalid config object $class have not $key method or property");
             }
+
+            $middlewares[] = $middleware;
         }
 
         return new FlexMiddleware($middlewares);

@@ -40,5 +40,15 @@ class FlexMiddlewareTest extends TestCase
         $flex = FlexMiddlewareFactory::fromConfig(__DIR__ . DIRECTORY_SEPARATOR . 'middlewares.yaml');
 
         $this->assertNotEmpty($flex);
+
+        $ip = '123.123.123.123';
+        $request = Factory::createServerRequest('GET', '/', ['REMOTE_ADDR' => $ip]);
+
+        $response = Dispatcher::run([
+            $flex
+        ], $request);
+
+        $this->assertNotEmpty($response->getHeader('X-Request-Id'));
+
     }
 }
