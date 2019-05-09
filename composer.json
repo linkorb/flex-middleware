@@ -18,13 +18,13 @@
     "symfony/yaml": "^4.0",
     "psr/http-message": "^1.0.1",
     "psr/http-server-handler": "^1.0.1",
-    "psr/http-server-middleware": "^1.0.1"
+    "psr/http-server-middleware": "^1.0.1",
+    "middlewares/utils": "^2.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^8",
     "zendframework/zend-diactoros": "^2.1",
     "middlewares/uuid": "^1.1",
-    "middlewares/utils": "^2.2",
     "middlewares/client-ip": "^1.3"
   }
 }
