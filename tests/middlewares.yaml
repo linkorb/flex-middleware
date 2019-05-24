@@ -1,0 +1,20 @@
+middlewares:
+  uuid:
+    class: Middlewares\Uuid
+    header: X-Request-Id
+  clientIp:
+    class: Middlewares\ClientIp
+    remote: false
+    proxy:
+      ips:
+        - 127.0.0.1
+        - 10.0.0.1
+      headers:
+        - "Forwarded"
+        - "Forwarded-For"
+  #robots:
+  #  class: Middlewares\Robots
+  #  allow: false
+  #minify:
+  #  class: Middlewares\HtmlMinifier
+  #  inlineCss: true
